@@ -10,21 +10,40 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='letting',
-            name='address',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='user',
-        ),
-        migrations.DeleteModel(
-            name='Address',
-        ),
-        migrations.DeleteModel(
-            name='Letting',
-        ),
-        migrations.DeleteModel(
-            name='Profile',
-        ),
+        migrations.SeparateDatabaseAndState(
+            state_operations=[
+                migrations.RemoveField(
+                    model_name='letting',
+                    name='address',
+                ),
+                migrations.RemoveField(
+                    model_name='profile',
+                    name='user',
+                ),
+                migrations.DeleteModel(
+                    name='Address',
+                ),
+                migrations.DeleteModel(
+                    name='Letting',
+                ),
+                migrations.DeleteModel(
+                    name='Profile',
+                ),
+                    ],
+            database_operations=[
+                migrations.AlterModelTable(
+                    name='Address',
+                    table='lettings_address',
+                ),
+                migrations.AlterModelTable(
+                    name='Letting',
+                    table='lettings_letting',
+                ),
+                migrations.AlterModelTable(
+                    name='Profile',
+                    table='profiles_profile',
+                ),
+
+            ],
+         ),
     ]
