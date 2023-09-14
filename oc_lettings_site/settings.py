@@ -17,10 +17,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Error handlers
-handler404 = 'oc_lettings_site.views.handler404'
-handler500 = 'oc_lettings_site.views.handler500'
-
 # Application definition
 
 INSTALLED_APPS = [
