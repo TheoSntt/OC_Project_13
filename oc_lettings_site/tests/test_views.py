@@ -10,6 +10,7 @@ class TestBaseViews:
     @pytest.mark.django_db
     def test_indexView(self):
         """
+        Test the main app index view.
         First assert tests if there are issues rendering template by checking 200 status code,
         Second assert checks if our view is returning right template
         """

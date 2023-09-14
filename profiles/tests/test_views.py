@@ -9,9 +9,27 @@ from pytest_django.asserts import assertTemplateUsed
 class TestLettingsViews:
     client = Client()
 
+    def create_profile(self):
+        """
+        Helper function that creates a Profile, for use in tests that needs
+        for a profile to exist.
+        The function creates a User first, for Profile is linked to User.
+        """
+        user = User.objects.create(
+            username="bobmorane",
+            password="bob123",
+            first_name="Bob",
+            last_name="Morane",
+            email="bob.morane@mail.fr"
+        )
+        Profile.objects.create(
+            user=user,
+            favorite_city=1)
+
     @pytest.mark.django_db
     def test_indexView(self):
         """
+        Test the profiles app index view.
         First assert tests if there are issues rendering template by checking 200 status code,
         Second assert checks if our view is returning right template
         """
@@ -24,22 +42,13 @@ class TestLettingsViews:
     @pytest.mark.django_db
     def test_profileView(self):
         """
+        Test the profiles app profile view.
         First assert tests if there are issues rendering template by checking 200 status code,
         Second assert checks if our view is returning right template
         """
+        self.create_profile()
 
-        # Create an adress object in the test db
-        user = User.objects.create(
-            username="bobmorane",
-            password="bob123",
-            first_name="Bob",
-            last_name="Morane",
-            email="bob.morane@mail.fr"
-        )
-        # Create a letting object in the test db
-        profile = Profile.objects.create(user=user,
-                                         favorite_city=1)
-        response = self.client.get(reverse('profile', args=[profile.user.username]))
+        response = self.client.get(reverse('profile', args=["bobmorane"]))
 
         assert response.status_code == 200
         assertTemplateUsed(response, 'profiles/profile.html')
