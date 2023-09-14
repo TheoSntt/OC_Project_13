@@ -1,8 +1,15 @@
+"""
+Defines the models of the lettings app.
+"""
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 
 
 class Address(models.Model):
+    """
+    Defines the Address Model.
+    Addresses are linked to the Letting Model through its address OneToOneField field
+    """
     class Meta:
         verbose_name_plural = "adresses"
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
@@ -13,10 +20,18 @@ class Address(models.Model):
     country_iso_code = models.CharField(max_length=3, validators=[MinLengthValidator(3)])
 
     def __str__(self):
+        """
+        Address model str method.
+        It defines what string is returned when str(<an address object>) is called
+        """
         return f'{self.number} {self.street}'
 
 
 class Letting(models.Model):
+    """
+    Defines the Letting Model.
+    Lettings are linked to the Address Model through their address OneToOneField field
+    """
     title = models.CharField(max_length=256)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 

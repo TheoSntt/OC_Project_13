@@ -1,3 +1,6 @@
+"""
+Defines the test class for the lettings app views
+"""
 from django.test import Client
 from django.urls import reverse
 from lettings.models import Letting, Address
@@ -6,6 +9,9 @@ from pytest_django.asserts import assertTemplateUsed
 
 
 class TestLettingsViews:
+    """
+    Test class for the lettings app views
+    """
     client = Client()
 
     def create_letting(self):

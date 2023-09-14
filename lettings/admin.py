@@ -1,3 +1,6 @@
+"""
+This module registers the lettings app models to the admin.
+"""
 from django.contrib import admin
 
 from lettings.models import Letting

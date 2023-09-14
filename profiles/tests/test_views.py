@@ -1,3 +1,6 @@
+"""
+Defines the test class for the profiles app views
+"""
 from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
@@ -6,7 +9,10 @@ import pytest
 from pytest_django.asserts import assertTemplateUsed
 
 
-class TestLettingsViews:
+class TestProfilesViews:
+    """
+    Test class for the profiles app views
+    """
     client = Client()
 
     def create_profile(self):

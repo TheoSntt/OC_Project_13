@@ -1,3 +1,6 @@
+"""
+Defines the test class for the profiles app url routes
+"""
 from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse, resolve
@@ -6,6 +9,9 @@ from profiles.models import Profile
 
 
 class TestProfilesURLs:
+    """
+    Test class for the profiles app url routes
+    """
     client = Client()
 
     def create_profile(self):
@@ -26,13 +32,23 @@ class TestProfilesURLs:
             favorite_city=1)
 
     def test_index_url(self):
+        """
+        Test the index url.
+        First assert that the right url path is returned.
+        Second assert that the path calls the right view.
+        """
         path = reverse('profiles_index')
 
         assert path == "/profiles/"
         assert resolve(path).view_name == "profiles_index"
 
     @pytest.mark.django_db
-    def test_letting_url(self):
+    def test_profile_url(self):
+        """
+        Test the profile url.
+        First assert that the right url path is returned.
+        Second assert that the path calls the right view.
+        """
         self.create_profile()
         path = reverse('profile', args=[1])
 

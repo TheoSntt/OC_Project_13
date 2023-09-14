@@ -1,9 +1,15 @@
+"""
+Defines the test class for the lettings app models
+"""
 from django.test import Client
 from lettings.models import Letting, Address
 import pytest
 
 
 class TestLettingModels:
+    """
+    Test class for the lettings app models
+    """
     client = Client()
 
     def create_letting(self):
@@ -31,8 +37,8 @@ class TestLettingModels:
     @pytest.mark.django_db
     def test_lettingModel(self):
         """
-        Test the Letting model
-        Creates a Letting and then calls its str() method
+        Test the Letting model.
+        Creates a Letting and then calls its str() method.
         """
         letting = self.create_letting()['letting']
 
@@ -42,8 +48,8 @@ class TestLettingModels:
     @pytest.mark.django_db
     def test_adressModel(self):
         """
-        Test the Letting model
-        Creates a Letting and then calls its str() method
+        Test the Address model.
+        Creates a Address and then calls its str() method.
         """
         address = self.create_letting()['address']
 

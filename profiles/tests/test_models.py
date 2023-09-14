@@ -1,3 +1,6 @@
+"""
+Defines the test class for the profiles app models
+"""
 from django.contrib.auth.models import User
 from django.test import Client
 from profiles.models import Profile
@@ -5,6 +8,9 @@ import pytest
 
 
 class TestProfileModels:
+    """
+    Test class for the profiles app models
+    """
     client = Client()
 
     def create_profile(self):
@@ -29,8 +35,8 @@ class TestProfileModels:
     @pytest.mark.django_db
     def test_profileModel(self):
         """
-        Test the Profile model
-        Creates a Profile and then calls its str() method
+        Test the Profile model.
+        Creates a Profile and then calls its str() method.
         """
         profile = self.create_profile()
 

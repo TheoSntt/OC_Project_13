@@ -1,3 +1,6 @@
+"""
+Defines the test class for the website homepage view
+"""
 from django.test import Client
 from django.urls import reverse
 import pytest
@@ -5,6 +8,9 @@ from pytest_django.asserts import assertTemplateUsed
 
 
 class TestBaseViews:
+    """
+    Test class for the website homepage view
+    """
     client = Client()
 
     @pytest.mark.django_db

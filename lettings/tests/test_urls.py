@@ -1,3 +1,6 @@
+"""
+Defines the test class for the lettings app url routes
+"""
 from django.test import Client
 from django.urls import reverse, resolve
 import pytest
@@ -5,9 +8,17 @@ from lettings.models import Letting, Address
 
 
 class TestLettingsURLs:
+    """
+    Test class for the lettings app url routes
+    """
     client = Client()
 
     def create_letting(self):
+        """
+        Helper function that creates a Letting, for use in tests that needs
+        for a letting to exist.
+        The function creates a Address first, for Letting is linked to Address.
+        """
         # Create an adress object
         address = Address.objects.create(
             number=11,
@@ -22,6 +33,11 @@ class TestLettingsURLs:
             address=address)
 
     def test_index_url(self):
+        """
+        Test the index url.
+        First assert that the right url path is returned.
+        Second assert that the path calls the right view.
+        """
         path = reverse('lettings_index')
 
         assert path == "/lettings/"
@@ -29,6 +45,11 @@ class TestLettingsURLs:
 
     @pytest.mark.django_db
     def test_letting_url(self):
+        """
+        Test the letting url.
+        First assert that the right url path is returned.
+        Second assert that the path calls the right view.
+        """
         self.create_letting()
         path = reverse('letting', args=[1])
 
