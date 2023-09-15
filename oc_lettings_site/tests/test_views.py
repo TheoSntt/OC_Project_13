@@ -25,3 +25,16 @@ class TestBaseViews:
 
         assert response.status_code == 200
         assertTemplateUsed(response, 'index.html')
+
+    @pytest.mark.django_db
+    def test_404(self):
+        """
+        Test the response for a non existing URL.
+        First assert tests if the status code is 404,
+        Second assert checks if our app is rendering our custom 404.html template
+        """
+
+        response = self.client.get(reverse('index')+"wrong_url")
+
+        assert response.status_code == 404
+        assertTemplateUsed(response, '404.html')
