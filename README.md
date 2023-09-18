@@ -37,6 +37,10 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `cd /path/to/Python-OC-Lettings-FR`
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
+- Ajouter une variable `OC_LETTINGS_DJANGO_SECRET_KEY` à vos variables d'environnement.
+  Pour la version de développement, la clé est `fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s`
+- Ajouter une variable `OC_LETTINGS_SENTRY_DNS` à vos variables d'environnement.
+  Renseignez la valeur fournie par Sentry lors de la création de l'application sur votre compte.
 - `python manage.py runserver`
 - Aller sur `http://localhost:8000` dans un navigateur.
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
@@ -59,9 +63,9 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - Ouvrir une session shell `sqlite3`
 - Se connecter à la base de données `.open oc-lettings-site.sqlite3`
 - Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
+- Afficher les colonnes dans le tableau des profils, `pragma table_info(profiles_profile);`
+- Lancer une requête sur la table des profils, `SELECT user_id, favorite_city FROM
+  profiles_profile WHERE favorite_city LIKE 'B%';`
 - `.quit` pour quitter
 
 #### Panel d'administration
