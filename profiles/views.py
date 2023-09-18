@@ -4,7 +4,14 @@ Those views render the appropriate templates when called.
 """
 from django.shortcuts import render
 from profiles.models import Profile
+from django.http import Http404
 from django.shortcuts import get_object_or_404
+import logging
+
+
+# Create logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 # Returns the profiles index page
@@ -27,7 +34,11 @@ def profile(request, username):
     It retrieves it from the db,
     and then renders the profiles/profile.html template with it as context.
     """
-    # profile = Profile.objects.get(user__username=username)
-    profile = get_object_or_404(Profile, user__username=username)
-    context = {'profile': profile}
-    return render(request, 'profiles/profile.html', context)
+    try:
+        # profile = Profile.objects.get(user__username=username)
+        profile = get_object_or_404(Profile, user__username=username)
+        context = {'profile': profile}
+        return render(request, 'profiles/profile.html', context)
+    except Http404:
+        logger.error("Error 404 happened on profiles", exc_info=True)
+        raise

@@ -4,7 +4,14 @@ Those views render the appropriate templates when called.
 """
 from django.shortcuts import render
 from lettings.models import Letting
+from django.http import Http404
 from django.shortcuts import get_object_or_404
+import logging
+
+
+# Create logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 # Returns the lettings index page
@@ -27,9 +34,13 @@ def letting(request, letting_id):
     It retrieves it from the db,
     and then renders the lettings/letting.html template with it as context.
     """
-    letting = get_object_or_404(Letting, id=letting_id)
-    context = {
-        'title': letting.title,
-        'address': letting.address,
-    }
-    return render(request, 'lettings/letting.html', context)
+    try:
+        letting = get_object_or_404(Letting, id=letting_id)
+        context = {
+            'title': letting.title,
+            'address': letting.address,
+        }
+        return render(request, 'lettings/letting.html', context)
+    except Http404:
+        logger.error("Error 404 happened on lettings", exc_info=True)
+        raise
