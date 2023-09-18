@@ -50,7 +50,7 @@ class TestProfilesViews:
         """
         Test the profiles app profile view.
         First assert tests if there are issues rendering template by checking 200 status code,
-        Second assert checks if our view is returning right template
+        Second assert checks if our view is returning the right template
         """
         self.create_profile()
 
@@ -58,3 +58,17 @@ class TestProfilesViews:
 
         assert response.status_code == 200
         assertTemplateUsed(response, 'profiles/profile.html')
+
+    @pytest.mark.django_db
+    def test_profileView_404(self):
+        """
+        Test the profiles app profile view 404 error.
+        First assert tests if the status code is 404 when a non existing profile is queried,
+        Second assert checks if our view is returning the right template.
+        """
+        # self.create_profile()
+
+        response = self.client.get(reverse('profile', args=["bobmorane"]))
+
+        assert response.status_code == 404
+        assertTemplateUsed(response, '404.html')

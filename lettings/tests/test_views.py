@@ -51,7 +51,7 @@ class TestLettingsViews:
         """
         Test the lettings app letting view.
         First assert tests if there are issues rendering template by checking 200 status code,
-        Second assert checks if our view is returning right template
+        Second assert checks if our view is returning the right template
         """
 
         self.create_letting()
@@ -59,3 +59,17 @@ class TestLettingsViews:
 
         assert response.status_code == 200
         assertTemplateUsed(response, 'lettings/letting.html')
+
+    @pytest.mark.django_db
+    def test_LettingView_404(self):
+        """
+        Test the lettings app letting view 404 error.
+        First assert tests if the status code is 404 when a non existing letting is queried,
+        Second assert checks if our view is returning the right template.
+        """
+
+        # self.create_letting()
+        response = self.client.get(reverse('letting', args=[1]))
+
+        assert response.status_code == 404
+        assertTemplateUsed(response, '404.html')
