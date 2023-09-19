@@ -50,7 +50,7 @@ jobs:
             coverage xml -o test-results/coverage.xml
             coverage=$(coverage report -m | grep TOTAL | awk '{print $4}')
             if [ "$coverage" \< 80 ]; then
-              echo "Test coverage is below 80% ($coverage%)"
+              echo "Argl ! Test coverage is below 80% ($coverage%)"
               exit 1
             fi
 
