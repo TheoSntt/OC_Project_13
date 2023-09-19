@@ -17,7 +17,7 @@ jobs:
           name: Install Python deps in a venv
           command: |
             python3 -m venv env
-            .env/bin/activate
+            . env/bin/activate
       - python/install-packages:
           pkg-manager: pip
       - run:
