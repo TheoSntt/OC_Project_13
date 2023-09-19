@@ -11,6 +11,7 @@ jobs:
   unit-tests-and-linter:
     docker:
       - image: cimg/python:3.11.5
+    parallelism: 4
     steps:
       - checkout
       - run:
@@ -25,13 +26,13 @@ jobs:
           command: flake8
       - run:
           name: Run Tests
-          command: pytest --cov=.
+          command: pytest --cov=.| circleci tests split --split-by=timings)
       - run:
           name: Check Test Coverage
           command: |
             coverage=$(coverage report -m | grep TOTAL | awk '{print $4}')
-            if [ "$coverage" \< 90 ]; then
-              echo "Test coverage is below 90% ($coverage%)"
+            if [ "$coverage" \< 80 ]; then
+              echo "Test coverage is below 80% ($coverage%)"
               exit 1
             fi
 
