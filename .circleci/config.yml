@@ -4,14 +4,12 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
-  # docker: circleci/docker@2.0.3
-  # heroku: circleci/heroku@1.2.6
 
 jobs:
   unit-tests-and-linter:
     docker:
       - image: cimg/python:3.11.5
-    parallelism: 4
+    parallelism: 4  # Adjust the number of parallel jobs as needed
     steps:
       - checkout
       - run:
@@ -24,23 +22,43 @@ jobs:
       - run:
           name: Linter
           command: flake8
+      # Use the circleci tests split command to split tests into parallel jobs
+      - run:
+          name: Split Tests
+          command: circleci tests split --split-by=timings
       - run:
           name: Run Tests
-          command: pytest --cov=.| circleci tests split --split-by=timings)
+          command: pytest --cov=. --junit-xml=test-results/junit.xml
+
+  calculate-coverage:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
       - run:
-          name: Check Test Coverage
+          name: Install Python deps in a venv
           command: |
+            python3 -m venv env
+            . env/bin/activate
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Calculate Test Coverage
+          command: |
+            pip install coverage
+            coverage combine --append
+            coverage report -m
+            coverage xml -o test-results/coverage.xml
             coverage=$(coverage report -m | grep TOTAL | awk '{print $4}')
             if [ "$coverage" \< 80 ]; then
               echo "Test coverage is below 80% ($coverage%)"
               exit 1
             fi
 
-      # - store_test_results:
-      #     path: test-results
-  
-
 workflows:
   build-and-deploy:
     jobs:
       - unit-tests-and-linter
+      - calculate-coverage:
+          requires:
+            - unit-tests-and-linter
