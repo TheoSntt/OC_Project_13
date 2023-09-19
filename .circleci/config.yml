@@ -22,13 +22,12 @@ jobs:
       - run:
           name: Linter
           command: flake8
-      # Use the circleci tests split command to split tests into parallel jobs
       - run:
           name: Split Tests
           command: circleci tests split --split-by=timings
       - run:
           name: Run Tests
-          command: pytest --cov=. --junit-xml=test-results/junit.xml
+          command: pytest --cov=. --cov-append --junit-xml=test-results/junit.xml
 
   calculate-coverage:
     docker:
@@ -43,10 +42,10 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Calculate Test Coverage
+          name: Combine Coverage Data
           command: |
             pip install coverage
-            coverage combine --append
+            coverage combine
             coverage report -m
             coverage xml -o test-results/coverage.xml
             coverage=$(coverage report -m | grep TOTAL | awk '{print $4}')
