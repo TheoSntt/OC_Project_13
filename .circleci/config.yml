@@ -25,7 +25,7 @@ jobs:
           command: flake8
       - run:
           name: Run Tests
-          command: pytest --cov=myapp tests/
+          command: pytest --cov=.
       - run:
           name: Check Test Coverage
           command: |
