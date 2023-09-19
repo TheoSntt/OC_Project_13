@@ -21,13 +21,22 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Unit-tests
-          command: pytest
-      - run:
           name: Linter
           command: flake8
-      - store_test_results:
-          path: test-results
+      - run:
+          name: Run Tests
+          command: pytest --cov=myapp tests/
+      - run:
+          name: Check Test Coverage
+          command: |
+            coverage=$(coverage report -m | grep TOTAL | awk '{print $4}')
+            if [ "$coverage" \< 80 ]; then
+              echo "Test coverage is below 80% ($coverage%)"
+              exit 1
+            fi
+
+      # - store_test_results:
+      #     path: test-results
   
 
 workflows:
