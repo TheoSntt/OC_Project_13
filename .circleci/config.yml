@@ -31,6 +31,6 @@ jobs:
   
 
 workflows:
-  sample:
+  build-and-deploy:
     jobs:
       - unit-tests-and-linter
