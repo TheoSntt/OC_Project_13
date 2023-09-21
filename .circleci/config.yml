@@ -4,7 +4,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
-  # docker: circleci/docker@2.0.3
+  docker: circleci/docker@2.3.0
   # heroku: circleci/heroku@1.2.6
 
 jobs:
@@ -35,11 +35,29 @@ jobs:
               exit 1
             fi
 
-      # - store_test_results:
-      #     path: test-results
-  
+  build-push-docker:
+    # executor: my-machine
+    steps:
+      - checkout
+      - run:
+          name: Build Docker image
+          command: docker build -t $DOCKER_USER/oc_lettings:$CIRCLE_SHA1 .
+      - run:
+          name: Push Docker Image
+          command: |
+            docker login -u $DOCKER_USER docker login -p $DOCKER_PASS
+            docker tag $DOCKER_USER/oc_lettings:$CIRCLE_SHA1 $DOCKER_USER/oc_lettings:lastest
+            docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
+            docker push $DOCKER_USER/oc_lettings:lastest
 
 workflows:
   build-and-deploy:
     jobs:
       - unit-tests-and-linter
+      - build-push-docker:
+          requires:
+            - unit-tests-and-linter
+          filters:
+            branches:
+              only:
+                - main

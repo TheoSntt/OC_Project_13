@@ -18,7 +18,7 @@ RUN pip install -r requirements.txt
 # Copy project's code into work directory
 COPY . /usr/src/app
 
-# Exposes port 8000
-EXPOSE 8000
+# Exposes port 8080
+EXPOSE 8080
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
