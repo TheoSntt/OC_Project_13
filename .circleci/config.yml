@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Push Docker Image
           command: |
-            docker login -u $DOCKER_USER docker login -p $DOCKER_PASS
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag $DOCKER_USER/oc_lettings:$CIRCLE_SHA1 $DOCKER_USER/oc_lettings:lastest
             docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
             docker push $DOCKER_USER/oc_lettings:lastest
