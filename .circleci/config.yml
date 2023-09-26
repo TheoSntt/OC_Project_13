@@ -59,8 +59,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "Deploy"
-        command: curl -X GET https://api.render.com/deploy/srv-ck9effmgtj9c73cdmqg0?key=qkdphtHhxxs
+          name: "Deploy"
+          command: curl -X GET https://api.render.com/deploy/srv-ck9effmgtj9c73cdmqg0?key=qkdphtHhxxs
 
 workflows:
   build-and-deploy:
