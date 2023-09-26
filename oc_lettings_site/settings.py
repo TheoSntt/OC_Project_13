@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get('OC_LETTINGS_DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['oc-lettings-tx4m.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
