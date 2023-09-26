@@ -53,7 +53,7 @@ jobs:
             docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
             docker push $DOCKER_USER/oc_lettings:latest
 
-  deploy-on-render:
+  deploy-to-render:
     docker:
       - image: cimg/base:stable
     steps:
@@ -73,7 +73,7 @@ workflows:
             branches:
               only:
                 - main
-      - deploy-on-render:
+      - deploy-to-render:
           requires:
             - build-push-docker
           filters:
