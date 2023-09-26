@@ -53,6 +53,15 @@ jobs:
             docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
             docker push $DOCKER_USER/oc_lettings:latest
 
+  deploy-on-render:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+        name: "Deploy"
+        command: curl -X GET https://api.render.com/deploy/srv-ck9effmgtj9c73cdmqg0?key=qkdphtHhxxs
+
 workflows:
   build-and-deploy:
     jobs:
@@ -60,6 +69,13 @@ workflows:
       - build-push-docker:
           requires:
             - unit-tests-and-linter
+          filters:
+            branches:
+              only:
+                - main
+      - deploy-on-render:
+          requires:
+            - build-push-docker
           filters:
             branches:
               only:
