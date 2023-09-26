@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Push Docker image
           command: |
-            docker login -u $DOCKER_USER --password-stdin
+            echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
             docker tag $DOCKER_USER/oc_lettings:$CIRCLE_SHA1 $DOCKER_USER/oc_lettings:latest
             docker push $DOCKER_USER/oc_lettings:$CIRCLE_SHA1
             docker push $DOCKER_USER/oc_lettings:latest
