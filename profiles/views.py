@@ -23,6 +23,7 @@ def index(request):
     """
     profiles_list = Profile.objects.all()
     context = {'profiles_list': profiles_list}
+    logger.info("List view rendered for profiles :", extra=context)
     return render(request, 'profiles/index.html', context)
 
 
@@ -38,6 +39,7 @@ def profile(request, username):
         # profile = Profile.objects.get(user__username=username)
         profile = get_object_or_404(Profile, user__username=username)
         context = {'profile': profile}
+        logger.info("Detailed view rendered for profile :", extra=context)
         return render(request, 'profiles/profile.html', context)
     except Http404:
         logger.error("Error 404 happened on profiles", exc_info=True)

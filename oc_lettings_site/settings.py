@@ -1,5 +1,6 @@
 import os
 import sentry_sdk
+import logging
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 
@@ -131,7 +132,10 @@ sentry_sdk.init(
             signals_spans=True,
             cache_spans=True,
             ),
-        LoggingIntegration(),
+        LoggingIntegration(
+            level=logging.INFO,
+            event_level=logging.INFO
+        ),
         ],
     # If you wish to associate users to errors (assuming you are using
     # django.contrib.auth) you may enable sending PII data.

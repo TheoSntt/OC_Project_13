@@ -23,6 +23,7 @@ def index(request):
     """
     lettings_list = Letting.objects.all()
     context = {'lettings_list': lettings_list}
+    logger.info("List view rendered for lettings :", extra=context)
     return render(request, 'lettings/index.html', context)
 
 
@@ -40,6 +41,7 @@ def letting(request, letting_id):
             'title': letting.title,
             'address': letting.address,
         }
+        logger.info("Detailed view rendered for letting :", extra=context)
         return render(request, 'lettings/letting.html', context)
     except Http404:
         logger.error("Error 404 happened on lettings", exc_info=True)
