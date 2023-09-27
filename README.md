@@ -153,8 +153,9 @@ Création des variables d'environnement au niveau du projet :
 
 La commande unique pour récupération de l'application en local et son démarrage immédiat est :
 
-`docker run --pull always -p 8080:8080 --name oc_lettings_container theosinatti/oc_lettings:latest`
+`docker run --pull always -p 8080:8080 -e OC_LETTINGS_DJANGO_SECRET_KEY="<Secret Key>" --name oc_lettings_container theosinatti/oc_lettings:latest`
 
+- La DJANGO SECRET KEY doit être renseignée afin que le conteneur s'éxécute
 - oc_lettings_container est le nom du container qui sera exécuté 
 - theosinatti est le nom du compte Docker Hub  
 - latest peux être remplacé par le hash du commit souhaité.
