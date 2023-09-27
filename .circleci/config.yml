@@ -60,7 +60,7 @@ jobs:
       - checkout
       - run:
           name: "Deploy"
-          command: curl -X GET https://api.render.com/deploy/srv-ck9effmgtj9c73cdmqg0?key=qkdphtHhxxs
+          command: curl -X GET $RENDER_DEPLOY_HOOK
 
 workflows:
   build-and-deploy:
