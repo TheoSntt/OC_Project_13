@@ -22,7 +22,9 @@ jobs:
           pkg-manager: pip
       - run:
           name: Linter
-          command: flake8
+          command: |
+            flake8 > lint_results.txt
+            cat lint_results.txt
       - run:
           name: Run Tests
           command: pytest --cov=.
