@@ -23,8 +23,7 @@ jobs:
       - run:
           name: Linter
           command: |
-            flake8 > lint_results.txt
-            cat lint_results.txt
+            flake8 ./
       - run:
           name: Run Tests
           command: pytest --cov=.
