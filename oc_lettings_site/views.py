@@ -8,7 +8,7 @@ import logging
 
 # Create logger
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.INFO) 
 
 
 # Returns the home page of the app

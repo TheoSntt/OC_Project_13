@@ -22,8 +22,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Linter
-          command: |
-            flake8 ./
+          command: flake8
       - run:
           name: Run Tests
           command: pytest --cov=.
