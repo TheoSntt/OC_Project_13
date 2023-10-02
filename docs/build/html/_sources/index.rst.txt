@@ -3,12 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Bienvenue dans la documentation du site Web d'OC-lettings !
-===============================================
+Bienvenue dans la documentation du site Web d'Orange County lettings !
+======================================================================
 
 Orange County Lettings est une plateforme de location de biens immobiliers.
-Sur le site, vous pouvez consulter plusieurs lieux de location ainsi que les
-profils des utilisateurs.
+Le site Web d'OC Lettings permet de consulter les différentes locations disponibles
+ainsi que les profils des utilisateurs inscrits sur la plateforme.
 
 Technologies et langages de programmation
 -----------------------------------------
@@ -29,6 +29,7 @@ Les différentes plateformes utilisées sont :
    :maxdepth: 2
    :caption: Navigation:
 
+   manual
    install
    bdd
    dev

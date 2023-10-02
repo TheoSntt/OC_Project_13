@@ -12,9 +12,6 @@ composé de 4 pages principales :
 Les pages "Lettings" et "Profiles" permettent d'accéder aux pages détails
 présentant chaque élément en détail.
 
-Par exemple, la page "Lettings" permet d'accéder à la page indiquant les
-détails du lieu "Oceanview Retreat", c'est-à-dire son adresse complète.
-
 Exécuter le site en local avec Django
 -------------------------------------
 
