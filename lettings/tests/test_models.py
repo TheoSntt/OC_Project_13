@@ -53,5 +53,5 @@ class TestLettingModels:
         """
         address = self.create_letting()['address']
 
-        expected_value = "11 Rue des Peupliers"
+        expected_value = "12 Rue des Peupliers"
         assert str(address) == expected_value
