@@ -1,6 +1,13 @@
-## Résumé
+# Orange County Lettings
 
-Site web d'Orange County Lettings
+## Présentation du projet
+
+Il s'agit du dernier projet de ma formation de Développeur Python sur OpenClassrooms. Le site "Orange County Lettings", aux fonctionnalités très limitées, n'est que la base de travail du projet.  
+L'enjeu du projet était d'apporter un certain nombre d'amélioration au [site de base](https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR).  
+Dans un premier temps, il fallait modulariser l'architecture du site en créant de nouvelles apps Django et en y déplaçant les modèles, vues et URL, qui se trouvaient tous dans une seule application monolithique. Cette étape m'a permis d'approfondir ma connaissance des migrations Django, car il fallait déplacer les modèles sans perdre les données.  
+Ensuite, il fallait corriger un certain nombre d'erreurs, mettre en place des tests (avec une couverture de tests de plus de 80%), et mettre en place une surveillance à l'aide de Sentry.  
+La création d'une documentation en ligne à l'aide de Sphinx et Readthedocs était aussi demandé, ce qui m'a permis de me familiariser avec ces outils.  
+Enfin, la partie la plus importante du projet consistait en la mise en place d'un pipeline CI/CD, à l'aide de CircleCI. Cela m'a poussé à me familiariser avec de nombreux nouveaux outils : CircleCI évidemment, mais aussi Docker, Dockerhub, Render, ou même whitenoise pour la gestion des fichiers statiques dans une application Django déployée.
 
 ## Développement local
 
@@ -19,7 +26,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 #### Cloner le repository
 
 - `cd /path/to/put/project/in`
-- `git clone https://github.com/TheoSntt/OC_Project_13.git`
+- `git clone https://github.com/TheoSntt/oc-lettings.git`
 
 #### Créer l'environnement virtuel
 
@@ -147,6 +154,8 @@ Création des variables d'environnement au niveau du projet :
 | RENDER_DEPLOY_HOOK  |  Deploy Hook pour Render  |  l'URL du 'deploy hook' fourni par Render lors de la création de l'application dans l'interface Web  |
 ---
 
+Vous pouvez également consulter le pipeline CircleCI de ce projet [ici](https://app.circleci.com/pipelines/github/TheoSntt/oc-lettings).
+
 ## Docker Hub :
 
 [Docker-Hub Théo Sinatti Repository](https://hub.docker.com/r/theosinatti/oc_lettings) stocke les différentes versions de l'image docker de notre application.  
@@ -170,3 +179,8 @@ Pour que l'application fonctionne, il faut définir les mêmes variables que pou
 Pour rappel, ces variables sont : 
 - OC_LETTINGS_DJANGO_SECRET_KEY
 - OC_LETTINGS_SENTRY_DNS
+
+## Documentation :
+
+La documentation a été réalisée à l'aide de Sphinx et est publiée sur Readthedocs.
+Vous pouvez trouver la documentation en ligne de l'application [ici](https://oc-project-13.readthedocs.io/fr/latest/)https://oc-project-13.readthedocs.io/fr/latest/.
